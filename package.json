@@ -1,19 +1,24 @@
 {
   "name": "mazos-api-ts",
   "version": "0.0.1",
-  "description": "",
+  "description": "Plantilla Typescript + Apollo Server + GraphQL",
   "main": "webpack/common.js",
   "directories": {
-    "test": "test"
+    "test": "tests"
   },
   "scripts": {
-    "build": "webpack --config webpack/$NODE_ENV.js",
+    "build": "webpack --config webpack.$NODE_ENV.js",
     "prepare": "husky install",
     "start": "node dist/server",
     "start:env": "node --require dotenv/config dist/server",
     "ts-compile-check": "tsc -p tsconfig.json --noEmit"
   },
-  "keywords": [],
+  "keywords": [
+    "graphql",
+    "typescript",
+    "apollo",
+    "sequelize"
+  ],
   "author": "Sebastián González Riffo <sebastian@gonzalezr.cl>",
   "license": "ISC",
   "devDependencies": {
