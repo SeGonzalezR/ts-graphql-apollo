@@ -9,8 +9,7 @@
   "scripts": {
     "build": "webpack --config webpack.$NODE_ENV.js",
     "prepare": "husky install",
-    "start": "node dist/server",
-    "start:env": "node --require dotenv/config dist/server",
+    "start": "node --require dotenv/config dist/server",
     "ts-compile-check": "tsc -p tsconfig.json --noEmit"
   },
   "keywords": [
