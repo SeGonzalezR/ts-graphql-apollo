@@ -25,7 +25,9 @@ const query = new GraphQLObjectType({
         type: sample,
         description: 'Sample',
         resolve: () => {
-          return 'sample text'
+          return {
+            someValue: false
+          }
         }
       }
     }

@@ -1,6 +1,6 @@
 import winston, { createLogger, transports, format } from 'winston'
 import { hostname } from 'os'
-import { env } from './env'
+import { env } from './enviroments'
 require('winston-syslog')
 
 const logger = createLogger({

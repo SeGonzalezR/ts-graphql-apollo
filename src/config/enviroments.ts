@@ -11,5 +11,6 @@ export const env: Environment = {
   port: process.env.PORT || 4000,
   logLevel: process.env.LOG_LEVEL || 'info',
   enviroment: process.env.NODE_ENV || 'dev',
-  redis: process.env.REDIS_URI || 'redis://localhost'
+  redis: process.env.REDIS_URI || 'redis://localhost',
+  cacheStore: process.env.CACHE_STORE
 }

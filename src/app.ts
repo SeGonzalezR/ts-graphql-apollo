@@ -9,7 +9,7 @@ import helmet from 'helmet'
 import morgan from 'morgan'
 import path from 'path'
 
-import { env } from './config/env'
+import { env } from './config/enviroments'
 import logger from './config/logger'
 // import models from './models'
 // import passport from './passport'

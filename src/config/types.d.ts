@@ -24,4 +24,12 @@ export interface Environment {
 
   /** URL conexión con Redis. */
   redis: string
+
+  /**
+   * Conexión con redis.
+   *
+   * - redis: ioredis
+   * - other: ioredis-mock
+   */
+  cacheStore?: string
 }

@@ -7,19 +7,20 @@ import {
 } from 'apollo-server-express'
 import { ConnectionString } from 'connection-string'
 import { RedisCache } from 'apollo-server-cache-redis'
-// import { applyMiddleware } from 'graphql-middleware'
+import { applyMiddleware } from 'graphql-middleware'
 // import { createContext, EXPECTED_OPTIONS_KEY } from 'dataloader-sequelize'
 
 // Local deps
-import { env } from './env'
-import resolvers from './resolvers'
-import { schema } from './schemas'
+import { env } from './enviroments'
+import redis from './redis'
+import { schema } from '../schema'
 const redisUri = new ConnectionString(env.redis)
 
-// const middlewares: any = []
+const middlewares: any = []
 const options: ApolloServerExpressConfig = {
   context: ({ req }) => ({
-    req
+    req,
+    redis
     // [EXPECTED_OPTIONS_KEY]: createContext({})
   }),
   validationRules: [
@@ -43,12 +44,7 @@ const options: ApolloServerExpressConfig = {
       }
     })
   ],
-  // typeDefs,
-  resolvers,
-  schema
-  // schema: applyMiddleware(schema, ...middlewares),
-  // queues: {},
-  // redis,
+  schema: applyMiddleware(schema, ...middlewares)
 }
 
 if (process.env.NODE_ENV === 'production') {
@@ -73,5 +69,4 @@ export default server
 // const apollo = new ApolloServer({
 //   resolvers,
 //   typeDefs,
-//   playground: env.apollo.playground
 // })
