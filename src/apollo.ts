@@ -14,7 +14,7 @@ import { applyMiddleware } from 'graphql-middleware'
 // Local deps
 import { env } from './config/enviroments'
 import redis from './config/redis'
-import { schema } from './schema'
+import schema from './schema'
 const redisUri = new ConnectionString(env.redis)
 
 const middlewares: any = []
