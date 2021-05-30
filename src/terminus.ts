@@ -1,16 +1,17 @@
 // Cargar los modelos sequelize
 // import models from './models'
 
+import logger from './config/logger'
+
 /**
  * Metodo encargado ejecutar tareas previas a terminar la aplicación.
  * - Cierra todas las conexiones a sequelize.
  *
  * @example await onSignal()
  */
-export const onSignal = async (): Promise<any> => {
+export const onSignal = async (): Promise<void> => {
   // eslint-disable-next-line no-console
-  console.log(' > onSignal close connections')
-  await Promise.resolve('OK')
+  logger.info(' > onSignal close connections')
   // await Promise.all([models.sequelize.close()])
 }
 
@@ -20,8 +21,9 @@ export const onSignal = async (): Promise<any> => {
  * @example await onHealthCheck()
  * @returns {Promise<any>} -
  */
-export const onHealthCheck = async (): Promise<any> => {
-  await Promise.resolve(' onHealthCheck ')
+export const onHealthCheck = async (): Promise<void> => {
+  logger.info(' > onHealthCheck: sequelize.authenticate()')
+  // await Promise.resolve('onHealthCheck')
   // await Promise.all([models.sequelize.authenticate()])
 }
 
@@ -31,8 +33,8 @@ export const onHealthCheck = async (): Promise<any> => {
  * @example await onShutdown()
  * @returns {Promise<any>} -
  */
-export const onShutdown = async (): Promise<any> => {
-  // cleanup finished, server is shutting down
-  await Promise.resolve(' Servidor apagándose ')
+export const onShutdown = async (): Promise<void> => {
+  logger.info(' > onShutdown: Servidor apagándose')
+  // await Promise.resolve('Servidor apagándose')
   // await Promise.all([models.sequelize.authenticate()])
 }

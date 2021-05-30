@@ -25,8 +25,8 @@ Esta es una lista de presets que tiene configurado el repositorio en base a dife
 ## Herramientas de desarrollo
 
 - [ ] Versionamiento semántico (semantic-release)
-- [ ] Test unitarios (mocha)
-- [ ] Linters
+- [x] Test unitarios (mocha) `npm run test`
+- [x] Linters `npm run lint`
 
 # Compilar aplicación
 
