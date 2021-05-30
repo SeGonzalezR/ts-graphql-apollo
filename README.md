@@ -16,6 +16,7 @@ Por lo tanto hay 2 archivos principales que tienen ambientes de desarrollo para
 - [ ] Sistema caché (redis)
 - [ ] Sistema de colas (bull)
 - [ ] Versionamiento semántico (semantic-release)
+- [ ] Reportería de errores (sentry)
 
 # Compilar aplicación
 ```shell

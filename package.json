@@ -29,7 +29,10 @@
     "@commitlint/config-conventional": "11.0.0",
     "@eclass/eslint-config": "2.0.1",
     "@eclass/eslint-config-typescript": "1.0.3",
+    "@types/graphql-depth-limit": "1.1.2",
+    "@types/morgan": "1.9.2",
     "@types/webpack-env": "1.16.0",
+    "@types/winston-syslog": "2.0.3",
     "@typescript-eslint/eslint-plugin": "4.25.0",
     "@typescript-eslint/parser": "4.25.0",
     "clean-webpack-plugin": "4.0.0-alpha.0",
@@ -56,7 +59,21 @@
     "webpack-node-externals": "3.0.0"
   },
   "dependencies": {
-    "apollo-server": "2.25.0",
-    "graphql": "15.5.0"
+    "@godaddy/terminus": "4.8.0",
+    "@sentry/node": "6.4.1",
+    "apollo-server-cache-redis": "1.5.0",
+    "apollo-server-express": "2.25.0",
+    "apollo-server-plugin-response-cache": "0.9.0",
+    "connection-string": "4.3.4",
+    "dataloader-sequelize": "2.3.3",
+    "graphql": "15.5.0",
+    "graphql-depth-limit": "1.1.0",
+    "graphql-middleware": "6.0.10",
+    "graphql-yup-middleware": "1.0.0",
+    "helmet": "4.6.0",
+    "morgan": "1.10.0",
+    "winston": "3.3.3",
+    "winston-syslog": "2.4.4",
+    "yup": "0.32.9"
   }
 }
