@@ -57,7 +57,7 @@ if (
   process.env.CACHE_STORE === 'redis'
 ) {
   options.cache = new RedisCache({
-    host: redisUri.host,
+    host: redisUri.hostname,
     port: redisUri.port || 6379
   })
 }
