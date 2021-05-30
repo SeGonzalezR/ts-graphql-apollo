@@ -11,9 +11,9 @@ import { applyMiddleware } from 'graphql-middleware'
 // import { createContext, EXPECTED_OPTIONS_KEY } from 'dataloader-sequelize'
 
 // Local deps
-import { env } from './enviroments'
-import redis from './redis'
-import { schema } from '../schema'
+import { env } from './config/enviroments'
+import redis from './config/redis'
+import { schema } from './schema'
 const redisUri = new ConnectionString(env.redis)
 
 const middlewares: any = []

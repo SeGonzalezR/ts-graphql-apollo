@@ -14,7 +14,7 @@ import logger from './config/logger'
 // import models from './models'
 // import passport from './passport'
 // import router from './router'
-import server from './config/apollo'
+import server from './apollo'
 
 /**
  * Configuración Sentry
