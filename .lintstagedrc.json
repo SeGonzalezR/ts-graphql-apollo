@@ -1,0 +1,4 @@
+{
+  "{src,test}/**/*.{js,ts}": ["prettier-standard --lint --fix"],
+  "*.{json,yml}": ["prettier-standard"]
+}

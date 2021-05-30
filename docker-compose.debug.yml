@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+      args:
+        KNOWN_HOST: gitlab.com
+        SSH_PRIVATE_KEY: $SSH_PRIVATE_KEY
+    env_file: .env-dev
+    ports:
+      - 3000:3000
+      - 9229:9229
+    volumes:
+      - .:/usr/src/app
+    command: npm run dev:docker
+  mycli:
+    image: lgatica/mycli
+    env_file: .env-dev
+    entrypoint: /bin/sh
+    tty: true
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - 1025:1025
+      - 8025:8025
+  redis:
+    image: redis:5.0.9-alpine
+    ports:
+      - 6379:6379
+    volumes:
+      - redis_data:/data
+
+volumes:
+  mysql-data:
+  redis_data:

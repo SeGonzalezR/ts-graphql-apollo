@@ -1,0 +1,8 @@
+{
+  "extends": [
+    "@eclass:js-app",
+    "@eclass:sequelizev4",
+    "@eclass:self-host",
+    "@eclass:types-node-v12"
+  ]
+}

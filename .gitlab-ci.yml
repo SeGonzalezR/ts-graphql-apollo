@@ -1,0 +1,77 @@
+include:
+  - project: 'eclass/gitlab-ci-templates'
+    ref: master
+    file: '/node/.dependencies.yml'
+  - project: 'eclass/gitlab-ci-templates'
+    ref: master
+    file: '/node/.eslint.yml'
+  - project: 'eclass/gitlab-ci-templates'
+    ref: master
+    file: '/node/.commitlint.yml'
+  - project: 'eclass/gitlab-ci-templates'
+    ref: master
+    file: '/node/.ts-compile-check.yml'
+  - project: 'eclass/gitlab-ci-templates'
+    ref: master
+    file: '/node/.test-mysql.yml'
+  - project: 'eclass/gitlab-ci-templates'
+    ref: master
+    file: '/node/.docker-build.yml'
+
+stages:
+  - dependencies
+  - test
+  - build
+  - deploy
+  - postdeploy
+
+variables:
+  DOCKER_DRIVER: overlay
+
+dependencies:
+  stage: dependencies
+  script:
+    - npm ci
+
+eslint:
+  stage: test
+
+commitlint:
+  stage: test
+
+ts-compile-check:
+  stage: test
+
+test:
+  stage: test
+  before_script:
+    - echo "SELECT @@GLOBAL.sql_mode;" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"
+    - echo "SET GLOBAL sql_mode = 'NO_ZERO_DATE';" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"
+    - echo "SET GLOBAL character_set_server = 'utf8mb4';" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"
+    - echo "SET GLOBAL collation_server = 'utf8mb4_unicode_ci';" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"
+    - mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE" < test/docker-entrypoint-initdb.d/initdb.sql
+  script:
+    - touch .env-test
+    - npm test
+  services:
+    - mysql:5.7.31
+  variables:
+    DATABASE: mysql://root:root@mysql/api_mazos
+    MYSQL_DATABASE: test
+    MYSQL_ROOT_PASSWORD: root
+    NODE_ENV: test
+
+release:
+  image: eclasshq/node:12
+  stage: deploy
+  variables:
+    GL_TOKEN: yGC-2S6vX9TsdzeJACme
+  script:
+    - npx semantic-release
+  environment:
+    url: https://mazos.cl/
+    name: production
+  cache:
+    key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_PATH_SLUG
+    paths:
+      - node_modules/

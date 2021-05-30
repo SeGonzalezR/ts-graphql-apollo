@@ -1,0 +1,6 @@
+{
+  "reporterEnabled": "spec,xunit",
+  "xunitReporterOptions": {
+    "output": "coverage/report-xunit.xml"
+  }
+}

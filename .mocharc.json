@@ -1,0 +1,6 @@
+{
+  "exit": true,
+  "no-timeouts": true,
+  "reporter": "mocha-multi-reporters",
+  "reporter-options": ["configFile=mocha-config.json"]
+}

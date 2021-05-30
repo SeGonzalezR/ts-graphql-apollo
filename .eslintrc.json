@@ -1,0 +1,14 @@
+{
+  // "extends": ["@eclass", "@eclass/eslint-config-typescript"],
+  "rules": {
+    "no-bitwise": "off",
+    "no-shadow": [
+      "error",
+      {
+        "builtinGlobals": false,
+        "hoist": "functions",
+        "allow": []
+      }
+    ]
+  }
+}
