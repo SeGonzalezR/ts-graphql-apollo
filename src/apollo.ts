@@ -37,9 +37,7 @@ const options: ApolloServerExpressConfig = {
     redis
     // [EXPECTED_OPTIONS_KEY]: createContext({})
   }),
-  validationRules: [
-    depthLimit(Number(env.GraphQL.DepthLimit || '10'))
-  ],
+  validationRules: [depthLimit(Number(env.GraphQL.DepthLimit || '10'))],
   /**
    * Formatea errores en la respuesta.
    */
@@ -75,10 +73,7 @@ if (env.enviroment === 'production') {
   options.tracing = true
   options.introspection = env.apollo.introspection
 }
-if (
-  env.enviroment === 'production' ||
-  process.env.CACHE_STORE === 'redis'
-) {
+if (env.enviroment === 'production' || process.env.CACHE_STORE === 'redis') {
   options.cache = new RedisCache({
     host: redisUri.hostname,
     port: redisUri.port || 6379

@@ -14,37 +14,42 @@ Esta es una lista de presets que tiene configurado el repositorio en base a dife
 [./src/config/enviroments.ts](/src/config/enviroments.ts)
 
 ## Herramientas en producción
-- [X] GraphQL 15.5x
+
+- [x] GraphQL 15.5x
 - [ ] sequelize 6.0x
 - [ ] Traducciones (i18n)
-- [X] Sistema caché (redis)
+- [x] Sistema caché (redis)
 - [ ] Sistema de colas (bull)
-- [X] Reportería de errores (sentry)
+- [x] Reportería de errores (sentry)
+
 ## Herramientas de desarrollo
+
 - [ ] Versionamiento semántico (semantic-release)
 - [ ] Test unitarios (mocha)
 - [ ] Linters
 
 # Compilar aplicación
+
 ```shell
   // desarrollo
   NODE_ENV=dev npm run build
   // o en producción
   NODE_ENV=production npm run build
 ```
- 
+
 # Iniciar la aplicación
 
 ```shell
 npm start
 ```
+
 al iniciar la aplicación se leerán las configuraciones del ambiente en `.env`
 
 ```
 # Puerto donde se levantará el servidor, por defecto 4000
 PORT=4000
 // Si se puede usar la instrospección de GraphQL
-APOLLO_INTROSPECTION=true 
+APOLLO_INTROSPECTION=true
 // Si tiene activado el playground en el servidor
 APOLLO_PLAYGROUND=true
 ```
@@ -59,7 +64,6 @@ APOLLO_PLAYGROUND=true
 info: Listen in localhost:4000
 
 ```
-
 
 ## Rutas disponibles
 

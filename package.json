@@ -10,7 +10,10 @@
     "build": "webpack --config webpack.$NODE_ENV.js",
     "prepare": "husky install",
     "start": "node --require dotenv/config dist/server",
-    "ts-compile-check": "tsc -p tsconfig.json --noEmit"
+    "ts-compile-check": "tsc -p tsconfig.json --noEmit",
+    "lint:js": "prettier-standard --lint '{src,tests}/**/*.js'",
+    "lint:ts": "prettier-standard '{src,test}/**/*.ts'",
+    "lint": "npm run lint:js && npm run lint:ts"
   },
   "keywords": [
     "graphql",
