@@ -1,14 +1,13 @@
 'use strict'
 
-import logger from './config/logger'
-import app from './app'
-import * as Terminus from './terminus'
-
 import cluster from 'cluster'
 import http from 'http'
-import { createTerminus } from '@godaddy/terminus'
+import { createTerminus, TerminusOptions } from '@godaddy/terminus'
 
-const numCPUs = Number(process.env.MAX_CPU) || require('os').cpus().length
+import * as Terminus from './terminus'
+import app from './app'
+import logger from './config/logger'
+import { env } from './config/enviroments'
 
 /**
  * Levanta la Aplicación
@@ -16,27 +15,31 @@ const numCPUs = Number(process.env.MAX_CPU) || require('os').cpus().length
  * @example listenApp()
  */
 const listenApp = () => {
-  const PORT = process.env.PORT || 3000
   const server = http.createServer(app)
-  const options = {
+  const options: TerminusOptions = {
     healthChecks: { '/healthcheck': Terminus.onHealthCheck },
     timeout: 1000,
-    signal: process.env.HEALTHCHECK_SIGNAL || 'SIGINT',
+    signal: env.signal,
     onSignal: Terminus.onSignal,
-    onShutdown: Terminus.onShutdown,
-    onHealthCheck: Terminus.onHealthCheck
+    onShutdown: Terminus.onShutdown
   }
 
   createTerminus(server, options)
-  server.listen(PORT)
+  server.listen(env.port)
   // eslint-disable-next-line no-console
-  logger.info(`Listen in localhost:${PORT}`)
+  logger.info(`Listen in localhost:${env.port}`)
 }
 
-if (process.env.NODE_ENV === 'production') {
+/**
+ * En ambiente productivo levantamos varios clusters segun la cantidad de CPU definidas
+ * Sino, solo levantamos solo un proceso.
+ *
+ * @see src/config/enviroments.ts
+ */
+if (env.enviroment === 'production') {
   if (cluster.isMaster) {
     // Fork workers.
-    for (let i = 0; i < numCPUs; i++) {
+    for (let i = 0; i < env.numCPUs; i++) {
       cluster.fork()
     }
 

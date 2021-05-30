@@ -1,4 +1,5 @@
 import depthLimit from 'graphql-depth-limit'
+import ms from 'ms'
 import responseCachePlugin from 'apollo-server-plugin-response-cache'
 import {
   ApolloError,
@@ -17,6 +18,19 @@ import { schema } from './schema'
 const redisUri = new ConnectionString(env.redis)
 
 const middlewares: any = []
+
+/**
+ * Configuraciones ApolloServer
+ * - context
+ * - validationRules
+ * - formatError
+ * - plugins
+ * - schema
+ * - tracing
+ * - playground
+ * - instrospection
+ * - cache
+ */
 const options: ApolloServerExpressConfig = {
   context: ({ req }) => ({
     req,
@@ -24,19 +38,25 @@ const options: ApolloServerExpressConfig = {
     // [EXPECTED_OPTIONS_KEY]: createContext({})
   }),
   validationRules: [
-    depthLimit(Number(process.env.GRAPHQL_DEPTH_LIMIT || '10'))
+    depthLimit(Number(env.GraphQL.DepthLimit || '10'))
   ],
+  /**
+   * Formatea errores en la respuesta.
+   */
   formatError: err => {
     delete err.extensions?.exception
     if (
       !(err.originalError instanceof ApolloError) &&
       err.originalError &&
-      process.env.NODE_ENV === 'production'
+      env.enviroment === 'production'
     ) {
       err.message = 'Internal server error'
     }
     return new ApolloError(err.message, err.extensions?.code, err.extensions)
   },
+  /** Caché por defecto máximo */
+  cacheControl: { defaultMaxAge: ms('15m') },
+  /** Pluggins cargados. */
   plugins: [
     responseCachePlugin({
       sessionId: (req: any) => {
@@ -44,16 +64,19 @@ const options: ApolloServerExpressConfig = {
       }
     })
   ],
+  /**
+   * Schema con las definiciones Query/Mutaciones
+   */
   schema: applyMiddleware(schema, ...middlewares)
 }
 
-if (process.env.NODE_ENV === 'production') {
+if (env.enviroment === 'production') {
   options.playground = false
   options.tracing = true
   options.introspection = env.apollo.introspection
 }
 if (
-  process.env.NODE_ENV === 'production' ||
+  env.enviroment === 'production' ||
   process.env.CACHE_STORE === 'redis'
 ) {
   options.cache = new RedisCache({
@@ -64,9 +87,3 @@ if (
 
 const server = new ApolloServer(options)
 export default server
-
-// const schemaWithMiddleware = applyMiddleware(schema, logInput)
-// const apollo = new ApolloServer({
-//   resolvers,
-//   typeDefs,
-// })
