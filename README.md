@@ -13,10 +13,10 @@ Por lo tanto hay 2 archivos principales que tienen ambientes de desarrollo para
 - [ ] sequelize 6.0x
 - [ ] Traducciones (i18n)
 - [ ] Test unitarios (mocha)
-- [ ] Sistema caché (redis)
+- [X] Sistema caché (redis)
 - [ ] Sistema de colas (bull)
 - [ ] Versionamiento semántico (semantic-release)
-- [ ] Reportería de errores (sentry)
+- [X] Reportería de errores (sentry)
 
 # Compilar aplicación
 ```shell
