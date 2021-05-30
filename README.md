@@ -7,6 +7,16 @@ Por lo tanto hay 2 archivos principales que tienen ambientes de desarrollo para
 - `dev`: desarrollo con HMR activado
 - `production`: producción sin HMR
 
+# Características soportadas
+
+- [X] GraphQL 15.5x
+- [ ] sequelize 6.0x
+- [ ] Traducciones (i18n)
+- [ ] Test unitarios (mocha)
+- [ ] Sistema caché (redis)
+- [ ] Sistema de colas (bull)
+- [ ] Versionamiento semántico (semantic-release)
+
 # Compilar aplicación
 ```shell
   // desarrollo
