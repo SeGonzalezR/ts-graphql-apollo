@@ -4,19 +4,26 @@ Este proyecto nace de la necesidad de tener un template para levantar API con Gr
 
 La aplicación está usando webpack para compilar typescript a ES5
 Por lo tanto hay 2 archivos principales que tienen ambientes de desarrollo para
-- `dev`: desarrollo con HMR activado
-- `production`: producción sin HMR
+
+- `webpack.dev.js`: desarrollo con HMR activado
+- `webpack.production.js`: producción sin HMR
 
 # Características soportadas
 
+Esta es una lista de presets que tiene configurado el repositorio en base a diferentes variables de entorno configuradas en el archivo
+[./src/config/enviroments.ts](/src/config/enviroments.ts)
+
+## Herramientas en producción
 - [X] GraphQL 15.5x
 - [ ] sequelize 6.0x
 - [ ] Traducciones (i18n)
-- [ ] Test unitarios (mocha)
 - [X] Sistema caché (redis)
 - [ ] Sistema de colas (bull)
-- [ ] Versionamiento semántico (semantic-release)
 - [X] Reportería de errores (sentry)
+## Herramientas de desarrollo
+- [ ] Versionamiento semántico (semantic-release)
+- [ ] Test unitarios (mocha)
+- [ ] Linters
 
 # Compilar aplicación
 ```shell
@@ -41,3 +48,20 @@ APOLLO_INTROSPECTION=true
 // Si tiene activado el playground en el servidor
 APOLLO_PLAYGROUND=true
 ```
+
+# Aplicación iniciada
+
+```shell
+> ts-graphql-apollo: npm start
+> ts-graphql-apollo@latest start ts-graphql-apollo
+> node --require dotenv/config dist/server
+
+info: Listen in localhost:4000
+
+```
+
+
+## Rutas disponibles
+
+- `/graphql`: Peticiones API
+- `/admin/queues`: Administrador de colas `bull`
