@@ -1,1 +1,1 @@
-CREATE DATABASE api_mazos;
+CREATE DATABASE api;
