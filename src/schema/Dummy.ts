@@ -1,17 +1,20 @@
 import {
   GraphQLBoolean,
+  GraphQLString,
   GraphQLObjectType,
   GraphQLFieldConfig,
   GraphQLInputObjectType
 } from 'graphql'
+
+import { models } from '../models/db'
 
 const DummyPayload = new GraphQLObjectType({
   name: 'DummyPayload',
   description: 'Dummy payload object',
   fields: {
     success: {
-      description: 'some value return',
-      type: GraphQLBoolean
+      description: 'Return some value',
+      type: GraphQLString
     }
   }
 })
@@ -30,7 +33,6 @@ const DummyInput = new GraphQLInputObjectType({
  * DummyModule API GraphQL
  *
  * Ejemplo módulo con resolver.
- *
  */
 export const DummyModule: GraphQLFieldConfig<any, any, any> = {
   type: DummyPayload,
@@ -42,9 +44,11 @@ export const DummyModule: GraphQLFieldConfig<any, any, any> = {
       description: 'Input params'
     }
   },
-  resolve: (root, args, ctx, info) => {
+  resolve: async (root, args, ctx, info) => {
+    const { Cat } = models
+    const gato = await Cat.findOne()
     return {
-      success: args.input.param1
+      success: gato?.name || 'empty'
     }
   }
 }
