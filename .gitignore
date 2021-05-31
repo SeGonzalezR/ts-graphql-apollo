@@ -51,6 +51,7 @@ jspm_packages/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+!.vscode/*.code-snippets
 .history
 .DS_Store
 

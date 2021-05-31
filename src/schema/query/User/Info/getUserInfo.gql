@@ -1,0 +1,6 @@
+query getUserInfo($UserInfoInput: UserInfoInput) {
+  getUserInfo(input: $UserInfoInput) {
+    status
+    success
+  }
+}
