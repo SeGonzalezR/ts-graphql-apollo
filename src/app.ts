@@ -8,18 +8,19 @@ import helmet from 'helmet'
 import morgan from 'morgan'
 import path from 'path'
 
-import logger from './config/logger'
+import Logger from './config/logger'
 import Sentry from './config/sentry'
-// import models from './models'
+import sequelize from './models/db'
+
 // import passport from './passport'
 // import router from './router'
 import server from './apollo'
 
-// models.sequelize.options.logging = logger.debug
+sequelize.options.logging = console.log
 // commentPlugin(models.sequelize)
-// Promise.all([models.sequelize.authenticate()]).catch(err => {
-//   throw err
-// })
+Promise.all([sequelize.authenticate()]).catch(err => {
+  throw err
+})
 
 const app = express()
 
@@ -61,7 +62,7 @@ server.applyMiddleware({ app, path: '/graphql' })
 // Error
 app.use(Sentry.Handlers.errorHandler())
 app.use((err: Error, req: any, res: any, next: any) => {
-  logger.error(err)
+  Logger.error(err)
   res.sendStatus(500)
 })
 

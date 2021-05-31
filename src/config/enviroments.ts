@@ -18,11 +18,11 @@ export const env: Environment = {
   SentryConfig:
     process.env.SENTRY === 'ON'
       ? {
-        SENTRY_DSN: process.env.SENTRY_DSN,
-        SENTRY_ENVIRONMENT: process.env.SENTRY_ENVIRONMENT,
-        SENTRY_NAME: process.env.SENTRY_NAME,
-        SENTRY_RELEASE: process.env.SENTRY_RELEASE
-      }
+          SENTRY_DSN: process.env.SENTRY_DSN,
+          SENTRY_ENVIRONMENT: process.env.SENTRY_ENVIRONMENT,
+          SENTRY_NAME: process.env.SENTRY_NAME,
+          SENTRY_RELEASE: process.env.SENTRY_RELEASE
+        }
       : undefined,
 
   // ...

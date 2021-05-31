@@ -3,7 +3,7 @@ import { hostname } from 'os'
 import { env } from './enviroments'
 require('winston-syslog')
 
-const logger = createLogger({
+const Logger = createLogger({
   level: env.logLevel,
   transports: [
     new transports.Console({
@@ -13,7 +13,7 @@ const logger = createLogger({
 })
 
 if (env.enviroment === 'production') {
-  logger.add(
+  Logger.add(
     // @ts-ignore
     new winston.transports.Syslog({
       host: process.env.PAPERTRAILAPP_HOST,
@@ -27,9 +27,9 @@ if (env.enviroment === 'production') {
   )
 }
 
-logger.stream = {
+Logger.stream = {
   // @ts-ignore
-  write: info => logger.info(info)
+  write: info => Logger.info(info)
 }
 
-export default logger
+export default Logger

@@ -26,6 +26,7 @@ const listenApp = () => {
 
   createTerminus(server, options)
   server.listen(env.port)
+
   // eslint-disable-next-line no-console
   logger.info(`Listen in localhost:${env.port}`)
 }
