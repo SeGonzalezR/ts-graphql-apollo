@@ -1,0 +1,48 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "docker:debug:up",
+        "type": "shell",
+        "command": "docker-compose -f ${workspaceFolder}/docker-compose.debug.yml pull mycli mailhog redis && docker-compose -f ${workspaceFolder}/docker-compose.debug.yml up -d mycli mailhog redis",
+        "problemMatcher": [],
+        "presentation": {
+          "reveal": "silent"
+        }
+      },
+      {
+        "label": "docker:debug:down",
+        "type": "shell",
+        "command": "docker-compose -f ${workspaceFolder}/docker-compose.debug.yml down",
+        "problemMatcher": [],
+        "presentation": {
+          "reveal": "silent"
+        }
+      },
+      {
+        "label": "docker:test:up",
+        "type": "shell",
+        "command": "docker-compose -f ${workspaceFolder}/docker-compose.test.yml pull db && docker-compose -f ${workspaceFolder}/docker-compose.test.yml up -d db && sleep 10",
+        "problemMatcher": [],
+        "presentation": {
+          "reveal": "silent"
+        }
+      },
+      {
+        "label": "docker:test:down",
+        "type": "shell",
+        "command": "docker-compose -f ${workspaceFolder}/docker-compose.test.yml down",
+        "problemMatcher": [],
+        "presentation": {
+          "reveal": "silent"
+        }
+      },
+      {
+        "type": "npm",
+        "script": "dev",
+        "problemMatcher": []
+      }
+    ]
+}
