@@ -1,37 +1,71 @@
-## Welcome to GitHub Pages
+# Typescript + GraphQL + Apollo Server
 
-You can use the [editor on GitHub](https://github.com/SeGonzalezR/ts-graphql-apollo/edit/main/docs/index.md) to maintain and preview the content for your website in Markdown files.
+Este proyecto nace de la necesidad de tener un template para levantar API con GraphQL de manera rápida y modular.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+La aplicación está usando webpack para compilar typescript a ES5
+Por lo tanto hay 2 archivos principales que tienen ambientes de desarrollo para
 
-### Markdown
+- `webpack.dev.js`: desarrollo con HMR activado
+- `webpack.production.js`: producción sin HMR
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+# Características soportadas
 
-```markdown
-Syntax highlighted code block
+Esta es una lista de presets que tiene configurado el repositorio en base a diferentes variables de entorno configuradas en el archivo
+[./src/config/enviroments.ts](/src/config/enviroments.ts)
 
-# Header 1
-## Header 2
-### Header 3
+## Herramientas en producción
 
-- Bulleted
-- List
+- [x] GraphQL 15.5x
+- [ ] sequelize 6.0x
+- [ ] Traducciones (i18n)
+- [x] Sistema caché (redis)
+- [ ] Sistema de colas (bull)
+- [x] Reportería de errores (sentry)
 
-1. Numbered
-2. List
+## Herramientas de desarrollo
 
-**Bold** and _Italic_ and `Code` text
+- [ ] Versionamiento semántico (semantic-release)
+- [x] Test unitarios (mocha) `npm run test`
+- [x] Linters `npm run lint`
 
-[Link](url) and ![Image](src)
+# Compilar aplicación
+
+```shell
+  // desarrollo
+  NODE_ENV=dev npm run build
+  // o en producción
+  NODE_ENV=production npm run build
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+# Iniciar la aplicación
 
-### Jekyll Themes
+```shell
+npm start
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/SeGonzalezR/ts-graphql-apollo/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+al iniciar la aplicación se leerán las configuraciones del ambiente en `.env`
 
-### Support or Contact
+```
+# Puerto donde se levantará el servidor, por defecto 4000
+PORT=4000
+// Si se puede usar la instrospección de GraphQL
+APOLLO_INTROSPECTION=true
+// Si tiene activado el playground en el servidor
+APOLLO_PLAYGROUND=true
+```
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+# Aplicación iniciada
+
+```shell
+> ts-graphql-apollo: npm start
+> ts-graphql-apollo@latest start ts-graphql-apollo
+> node --require dotenv/config dist/server
+
+info: Listen in localhost:4000
+
+```
+
+## Rutas disponibles
+
+- `/graphql`: Peticiones API
+- `/admin/queues`: Administrador de colas `bull`
